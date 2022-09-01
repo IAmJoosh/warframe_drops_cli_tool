@@ -12,6 +12,5 @@ search_query = input("Enter drop: ")
 
 with open('drops.json', 'w') as f:
     drops_json = json.dumps(get_drops(endpoint, search_query))
-    print(type(drops_json))
     f.writelines(drops_json)
     print(drops_json)
