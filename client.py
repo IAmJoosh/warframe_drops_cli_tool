@@ -39,7 +39,7 @@ class WarframeClient:
         Returns:
             Optional[dict]: A json object containing the alert data
         """
-        endpoint = f'/{platform}/alerts'
+        endpoint = f'/{platform}/alerts/'
         url = ''.join([self.base_url, endpoint])
 
         response = self.client.get(
@@ -114,21 +114,6 @@ class WarframeClient:
             return None
         
         return response.json()
-    
-    # ------------------------------------------------------------------------------------------------------------------
-    def get_cambion_drift_status(self, platform:str=Platforms.PC) -> Optional[dict]:
-        endpoint = f'/{platform}/cambionCycle/'
-        url = ''.join([self.base_url, endpoint])
-
-        response = self.client.get(
-            url=url,
-        )
-
-        if response.status_code != WarframeClient.SUCESS:
-            self.errors = response.json()
-            return None
-        
-        return response.json()
    
     # ------------------------------------------------------------------------------------------------------------------
     def get_cambion_drift_status(self, platform:str=Platforms.PC) -> Optional[dict]:
@@ -168,3 +153,8 @@ class WarframeClient:
 if __name__ == '__main__':
     with WarframeClient() as client:
         pprint(client.get_warframe('yareli')[0])
+        pprint(client.get_alerts())
+        pprint(client.get_baro())
+        pprint(client.get_orb_vallis_status())
+        pprint(client.get_cetus_status())
+        pprint(client.get_cambion_drift_status())
